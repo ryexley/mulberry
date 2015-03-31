@@ -1,0 +1,21 @@
+{
+  "name": "mulberry",
+  "version": "0.0.1",
+  "description": "Mock data generator/helper module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bob Yexley",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "3.6.0",
+    "moment": "2.9.0"
+  },
+  "devDependencies": {
+    "gulp": "3.8.11",
+    "gulp-eslint": "0.8.0",
+    "gulp-util": "3.0.4",
+    "webpack": "1.7.3"
+  }
+}
