@@ -20,7 +20,8 @@ gulp.task("webpack:uncompressed", function (next) {
         output: {
             path: "./dist/",
             filename: "[name].js",
-            libraryTarget: "umd"
+            libraryTarget: "umd",
+            library: "Mulberry"
         },
         plugins: [
             new webpack.optimize.DedupePlugin()
@@ -53,7 +54,8 @@ gulp.task("webpack:minified", function (next) {
         output: {
             path: "./dist/",
             filename: "[name].min.js",
-            libraryTarget: "umd"
+            libraryTarget: "umd",
+            library: "Mulberry"
         },
         plugins: [
             new webpack.optimize.DedupePlugin(),
