@@ -6,7 +6,9 @@ var webpack = require("webpack");
 gulp.task("lint", function () {
     gulp.src(["src/**/*.js"])
         .pipe(eslint({
-            rules: {},
+            rules: {
+                "no-underscore-dangle": false
+            },
             envs: ["node"]
         }))
         .pipe(eslint.format("stylish"));
@@ -20,6 +22,7 @@ gulp.task("webpack:uncompressed", function (next) {
         output: {
             path: "./dist/",
             filename: "[name].js",
+            sourceMapFilename: "[file].js.map",
             libraryTarget: "umd",
             library: "Mulberry"
         },

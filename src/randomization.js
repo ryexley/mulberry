@@ -6,14 +6,18 @@ var shuffle = require("lodash/collection/shuffle");
 module.exports = {
 
     random: function(min, max) {
+        min = min || 1;
+        max = max || 100;
         return Math.floor(Math.random() * (max - min + 1)) + parseInt(min, 10);
     },
 
     randomNumber: function(min, max) {
-        return Math.floor(Math.random() * ((max + 1) - min)) + parseInt(min, 10);
+        return this.random(min, max);
     },
 
     randomFloat: function(min, max, digits) {
+        min = min || 1;
+        max = max || 100;
         digits = digits || this.random(1, 10);
 
         var target = this.random(min, max);
