@@ -1,6 +1,7 @@
 var gulp = require("gulp");
 var gutil = require("gulp-util");
 var eslint = require("gulp-eslint");
+var run = require("child_process").spawn;
 var webpack = require("webpack");
 
 gulp.task("lint", function () {
@@ -12,6 +13,12 @@ gulp.task("lint", function () {
             envs: ["node"]
         }))
         .pipe(eslint.format("stylish"));
+});
+
+gulp.task("test", ["webpack:uncompressed"], function (next) {
+    run("npm", ["test", "-s"], { stdio: "inherit" }).on("exit", function (err) {
+        next(err);
+    });
 });
 
 gulp.task("webpack:uncompressed", function (next) {
@@ -28,7 +35,10 @@ gulp.task("webpack:uncompressed", function (next) {
         },
         plugins: [
             new webpack.optimize.DedupePlugin()
-        ]
+        ],
+        node: {
+            fs: "empty"
+        }
     }, function (err, stats) {
         if (err) {
             throw new gutil.PluginError("webpack", err);
@@ -63,7 +73,10 @@ gulp.task("webpack:minified", function (next) {
         plugins: [
             new webpack.optimize.DedupePlugin(),
             new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
-        ]
+        ],
+        node: {
+            fs: "empty"
+        }
     }, function (err, stats) {
         if (err) {
             throw new gutil.PluginError("webpack", err);
@@ -87,5 +100,5 @@ gulp.task("webpack:minified", function (next) {
 gulp.task("webpack", ["webpack:uncompressed", "webpack:minified"])
 
 gulp.task("watch", function () {
-    gulp.watch(["src/**/*.js"], ["lint", "webpack"]);
+    gulp.watch(["src/**/*.js", "spec/**/*.js"], ["lint", "webpack", "test"]);
 });

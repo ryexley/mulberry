@@ -4,7 +4,7 @@
   "description": "Mock data generator/helper module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha --reporter spec --bail --check-leaks spec/"
   },
   "author": "Bob Yexley",
   "license": "MIT",
@@ -13,9 +13,11 @@
     "moment": "2.9.0"
   },
   "devDependencies": {
+    "chai": "2.3.0",
     "gulp": "3.8.11",
     "gulp-eslint": "0.8.0",
     "gulp-util": "3.0.4",
+    "mocha": "2.2.4",
     "webpack": "1.7.3"
   }
 }
